@@ -1,35 +1,30 @@
-class LatLng {
-  const LatLng(double latitude, double longitude)
-      : latitude =
-            latitude < -90.0 ? -90.0 : (90.0 < latitude ? 90.0 : latitude),
-        longitude = longitude >= -180 && longitude < 180
-            ? longitude
-            : (longitude + 180.0) % 360.0 - 180.0;
+class BrimLatLng {
+  const BrimLatLng(double lat, double lng)
+      : lat = lat < -90.0 ? -90.0 : (90.0 < lat ? 90.0 : lat),
+        lng = lng >= -180 && lng < 180 ? lng : (lng + 180.0) % 360.0 - 180.0;
 
-  final double latitude;
+  final double lat;
 
-  final double longitude;
+  final double lng;
 
   Object toJson() {
-    return <double>[latitude, longitude];
+    return <double>[lat, lng];
   }
 
-  static LatLng? fromJson(Object? json) {
+  static BrimLatLng? fromJson(Object? json) {
     if (json == null) {
       return null;
     }
     assert(json is List && json.length == 2);
     final List<Object?> list = json as List<Object?>;
-    return LatLng(list[0]! as double, list[1]! as double);
+    return BrimLatLng(list[0]! as double, list[1]! as double);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is LatLng &&
-        other.latitude == latitude &&
-        other.longitude == longitude;
+    return other is BrimLatLng && other.lat == lat && other.lng == lng;
   }
 
   @override
-  int get hashCode => Object.hash(latitude, longitude);
+  int get hashCode => Object.hash(lat, lng);
 }

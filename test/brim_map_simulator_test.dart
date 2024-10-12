@@ -4,10 +4,13 @@ import 'package:test/test.dart';
 
 class MockPolyLineFinder extends Mock implements PolyLineFinder {
   @override
-  Future<List<LatLng>?> getRoutes(
+  Future<List<BrimLatLng>?> getRoutes(
       {RoutesRequest? routeRequest, String? googleApiKey}) {
-    return Future.value(
-        [LatLng(6.4483, 3.5547), LatLng(6.5, 3.5), LatLng(6.5708, 3.3484)]);
+    return Future.value([
+      BrimLatLng(6.4483, 3.5547),
+      BrimLatLng(6.5, 3.5),
+      BrimLatLng(6.5708, 3.3484)
+    ]);
   }
 
   @override
@@ -22,8 +25,8 @@ void main() {
   group('BrimMapSimulator Tests', () {
     late BrimMapSimulator simulator;
     late MockPolyLineFinder mockPolyLineFinder;
-    late LatLng pickup;
-    late LatLng dropOff;
+    late BrimLatLng pickup;
+    late BrimLatLng dropOff;
 
     setUp(() {
       mockPolyLineFinder = MockPolyLineFinder();
@@ -32,8 +35,8 @@ void main() {
         updateInterval: Duration(milliseconds: 100),
         polyLineFinder: mockPolyLineFinder,
       );
-      pickup = LatLng(6.4483, 3.5547);
-      dropOff = LatLng(6.5708, 3.3484);
+      pickup = BrimLatLng(6.4483, 3.5547);
+      dropOff = BrimLatLng(6.5708, 3.3484);
 
       print('SetUp first');
     });
@@ -44,7 +47,7 @@ void main() {
 
     test('startSimulation fetches route and notifies listeners', () async {
       bool listenerCalled = false;
-      simulator.onLocationChanged((LatLng latLng) {
+      simulator.onLocationChanged((BrimLatLng latLng) {
         listenerCalled = true;
       });
 

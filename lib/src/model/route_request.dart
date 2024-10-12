@@ -93,23 +93,23 @@ class RoutesRequest {
 
   /// Creates a [RoutesRequest] with default values based on origin and destination.
   factory RoutesRequest.withDefaultValues({
-    required LatLng origin,
-    required LatLng destination,
+    required BrimLatLng origin,
+    required BrimLatLng destination,
   }) {
     return RoutesRequest(
       origin: LocationHeading(
         location: Location(
           latLng: LatLngRoute(
-            latitude: origin.latitude,
-            longitude: origin.longitude,
+            latitude: origin.lat,
+            longitude: origin.lng,
           ),
         ),
       ),
       destination: LocationHeading(
         location: Location(
           latLng: LatLngRoute(
-            latitude: destination.latitude,
-            longitude: destination.longitude,
+            latitude: destination.lat,
+            longitude: destination.lng,
           ),
         ),
       ),
@@ -126,7 +126,6 @@ class RoutesRequest {
     );
   }
 }
-
 
 class LocationHeading {
   final Location? location;

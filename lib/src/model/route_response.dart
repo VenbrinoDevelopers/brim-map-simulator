@@ -76,6 +76,6 @@ class Polyline {
         "encodedPolyline": encodedPolyline,
       };
 
-  List<LatLng>? get polyLines =>
+  List<BrimLatLng>? get polyLines =>
       isEmpty(encodedPolyline) ? null : decodePolyline(encodedPolyline!);
 }

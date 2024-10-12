@@ -17,10 +17,10 @@ class BrimMapSimulator {
   int _currentIndex = 0;
 
   /// A list of listeners to notify of location changes.
-  final List<void Function(LatLng)> _listeners = [];
+  final List<void Function(BrimLatLng)> _listeners = [];
 
   /// The current route being simulated, represented as a list of LatLng points.
-  List<LatLng> _currentRoute = [];
+  List<BrimLatLng> _currentRoute = [];
 
   /// Creates an instance of `BrimMapSimulator`.
   ///
@@ -34,22 +34,22 @@ class BrimMapSimulator {
 
   /// Registers a listener to be notified when the location changes.
   ///
-  /// [onLocationChanged] is a callback function that receives the updated [LatLng] location.
-  void onLocationChanged(void Function(LatLng latLng) onLocationChanged) {
+  /// [onLocationChanged] is a callback function that receives the updated [BrimLatLng] location.
+  void onLocationChanged(void Function(BrimLatLng latLng) onLocationChanged) {
     addListener(onLocationChanged);
   }
 
   /// Adds a listener to the list of listeners.
   ///
   /// [listener] is a callback function that will receive location updates.
-  void addListener(void Function(LatLng latLng) listener) {
+  void addListener(void Function(BrimLatLng latLng) listener) {
     _listeners.add(listener);
   }
 
   /// Removes a listener from the list of listeners.
   ///
   /// [listener] is a callback function that will no longer receive updates.
-  void removeListener(void Function(LatLng latLng) listener) {
+  void removeListener(void Function(BrimLatLng latLng) listener) {
     _listeners.remove(listener);
   }
 
@@ -60,8 +60,8 @@ class BrimMapSimulator {
   /// [dropOff] is the destination location for the route.
   Future<void> startSimulation(
     String googleApiKey, {
-    required LatLng pickup,
-    required LatLng dropOff,
+    required BrimLatLng pickup,
+    required BrimLatLng dropOff,
   }) async {
     try {
       final routes = await _polyLineFinder.getRoutes(
@@ -86,7 +86,7 @@ class BrimMapSimulator {
   /// Starts the simulation using an existing list of polyline points.
   ///
   /// [polyLine] is a list of LatLng points representing the route to be simulated.
-  void startPolyLineSimulation(List<LatLng> polyLine) {
+  void startPolyLineSimulation(List<BrimLatLng> polyLine) {
     _updateRoute(polyLine);
   }
 
@@ -96,7 +96,7 @@ class BrimMapSimulator {
 
     _timer = Timer.periodic(_updateInterval, (timer) {
       if (_currentIndex < _currentRoute.length) {
-        LatLng currentPoint = _currentRoute[_currentIndex];
+        BrimLatLng currentPoint = _currentRoute[_currentIndex];
         _notifyListeners(currentPoint);
         _currentIndex++;
       } else {
@@ -125,7 +125,7 @@ class BrimMapSimulator {
   /// Updates the current route and starts the simulation with the new route.
   ///
   /// [newRoute] is a list of LatLng points representing the new route.
-  void _updateRoute(List<LatLng> newRoute) {
+  void _updateRoute(List<BrimLatLng> newRoute) {
     _currentRoute = newRoute;
     _currentIndex = 0;
     start();
@@ -134,7 +134,7 @@ class BrimMapSimulator {
   /// Notifies all registered listeners with the current position.
   ///
   /// [currentPosition] is the updated LatLng location that will be sent to listeners.
-  void _notifyListeners(LatLng currentPosition) {
+  void _notifyListeners(BrimLatLng currentPosition) {
     for (var listener in _listeners) {
       listener(currentPosition);
     }
@@ -144,5 +144,5 @@ class BrimMapSimulator {
   ///
   /// [pickup] is the starting location.
   /// [dropOff] is the destination location.
-  void _logNoRoutesFound(LatLng pickup, LatLng dropOff) {}
+  void _logNoRoutesFound(BrimLatLng pickup, BrimLatLng dropOff) {}
 }

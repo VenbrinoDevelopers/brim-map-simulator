@@ -1,10 +1,10 @@
 import 'package:brim_map_simulator/brim_map_simulator.dart';
 
 /// Decodes an encoded path string into a sequence of BrimLatLng objects.
-List<LatLng> decodePolyline(final String encodedPath) {
+List<BrimLatLng> decodePolyline(final String encodedPath) {
   int len = encodedPath.length;
 
-  final List<LatLng> coordinates = [];
+  final List<BrimLatLng> coordinates = [];
   int index = 0;
   int lat = 0;
   int lng = 0;
@@ -29,7 +29,7 @@ List<LatLng> decodePolyline(final String encodedPath) {
     } while (b >= 0x1f);
     lng += (result & 1) != 0 ? ~(result >> 1) : (result >> 1);
 
-    coordinates.add(LatLng(lat * 1e-5, lng * 1e-5));
+    coordinates.add(BrimLatLng(lat * 1e-5, lng * 1e-5));
   }
 
   return coordinates;

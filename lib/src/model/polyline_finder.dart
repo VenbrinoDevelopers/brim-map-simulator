@@ -6,7 +6,7 @@ abstract class PolyLineFinder {
   /// [routeRequest] and Google API key.
   ///
   /// Returns a list of LatLng points or null if an error occurs.
-  Future<List<LatLng>?> getRoutes({
+  Future<List<BrimLatLng>?> getRoutes({
     RoutesRequest? routeRequest,
     String? googleApiKey,
   });

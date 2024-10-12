@@ -21,7 +21,7 @@ class GooglePolyLineFinder extends PolyLineFinder {
   /// [googleApiKey] is required to authenticate the request to the API.
   /// Returns a list of LatLng points representing the route, or null if there was an error.
   @override
-  Future<List<LatLng>?> getRoutes({
+  Future<List<BrimLatLng>?> getRoutes({
     RoutesRequest? routeRequest,
     String? googleApiKey,
   }) async {
