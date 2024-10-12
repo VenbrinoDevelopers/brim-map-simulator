@@ -1,7 +1,9 @@
 class BrimLatLng {
   const BrimLatLng(double lat, double lng)
       : lat = lat < -90.0 ? -90.0 : (90.0 < lat ? 90.0 : lat),
-        lng = lng >= -180 && lng < 180 ? lng : (lng + 180.0) % 360.0 - 180.0;
+        lng = lng >= -180 && lng < 180
+            ? lng
+            : (lng + 180.0) % 360.0 - 180.0;
 
   final double lat;
 

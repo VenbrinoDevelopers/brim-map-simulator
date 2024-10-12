@@ -46,7 +46,7 @@ final simulator = BrimMapSimulator(
 3. Register a listener for location updates:
 
 ```dart
-simulator.onLocationChanged((LatLng latLng) {
+simulator.onLocationChanged((BrimLatLng latLng) {
   print("Location updated: ${latLng.latitude}, ${latLng.longitude}");
 });
 ```
@@ -57,8 +57,8 @@ Note: If you don't have a Google API key, you can use simulator.startPolyLineSim
 
 ```dart
 const String googleApiKey = 'YOUR_GOOGLE_API_KEY';
-final pickup = LatLng(6.4483, 3.5547);
-final dropOff = LatLng(6.5708, 3.3484);
+final pickup = BrimLatLng(6.4483, 3.5547);
+final dropOff = BrimLatLng(6.5708, 3.3484);
 
 await simulator.startSimulation(googleApiKey, pickup: pickup, dropOff: dropOff);
 ```
@@ -66,7 +66,7 @@ await simulator.startSimulation(googleApiKey, pickup: pickup, dropOff: dropOff);
 5. you can also simulate if you have a polyline already
 
 ```dart
-simulator.startPolyLineSimulation(<LatLng>[]);
+simulator.startPolyLineSimulation(<BrimLatLng>[]);
 ```
 
 6. Stopping the simulation:
