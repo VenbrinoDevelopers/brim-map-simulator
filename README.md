@@ -1,4 +1,4 @@
-#  🚗 Brim Map Simulator
+# 🚗 Brim Map Simulator
 
 Brim Map Simulator is a pure Dart package designed to simulate location updates along a specified route.It provides functionality to fetch routes, update locations at defined intervals, and notify listeners of location changes.
 
@@ -19,6 +19,7 @@ dependencies:
 ```
 
 The run
+
 #### dart pub get
 
 or, if using Flutter
@@ -87,14 +88,14 @@ simulator.dispose();
 void main() async {
   const String dummyApiKey = 'YOUR_GOOGLE_API_KEY';
 
-  final pickup = LatLng(6.4483, 3.5547);
-  final dropOff = LatLng(6.5708, 3.3484);
+  final pickup = BrimLatLng(6.4483, 3.5547);
+  final dropOff = BrimLatLng(6.5708, 3.3484);
 
   final simulator = BrimMapSimulator(
     updateInterval: Duration(milliseconds: 500),
   );
 
-  simulator.onLocationChanged((LatLng latLng) {
+  simulator.onLocationChanged((BrimLatLng latLng) {
     print("Location updated: ${latLng.latitude}, ${latLng.longitude}");
   });
 
